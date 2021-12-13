@@ -1,0 +1,26 @@
+<div *ngFor="let cart of cartList; let i = index">
+    <app-cart-item [cart]="cart"></app-cart-item>
+  </div>
+
+  <!-- <ul>
+    <li *ngFor="let item of cartSet">
+     {{item.product.category}}
+    </li>
+   </ul> -->
+<div *ngIf= "cart.product.id !== 0">
+   <p>
+    Quantity {{cart.quantity}}
+   </p>
+   <p>
+    {{cart.product.image}}
+   </p>
+   <p>
+    {{cart.product.title}}
+  </p>
+  <p>
+    {{cart.product.price}}
+  </p>
+</div>
+
+<button (click)="purchaseProduct()">Purchase</button>
+<button (click)="deleteProduct()">Delete</button>

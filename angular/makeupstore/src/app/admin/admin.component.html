@@ -1,0 +1,6 @@
+<div *ngFor="let productAdmin of productAdminList; let i = index">
+    <app-admin-item [productAdmin]="productAdmin"></app-admin-item>
+  </div>
+  <div *ngFor="let product of allProductList; let i = index">
+    <app-admin-item-two [product]="product" (addProductEvent)="addNewProduct(i, product)"></app-admin-item-two>
+  </div>

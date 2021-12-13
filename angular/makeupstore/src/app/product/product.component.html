@@ -1,0 +1,55 @@
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" >
+      <p><button (click)= "chooseCategory('electronic')">Electronics</button></p>
+      <br>
+      <p><button (click)= "chooseCategory('jewelery')">Jewelery</button></p>
+      <p><button (click)= "chooseCategory('men')">Men's clothing</button></p>
+      <p><button (click)= "chooseCategory('women')">Women's clothing</button></p>
+
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      
+      <p><button mat-button (click)="sidenav.toggle()">Categories</button></p>
+      
+      <!-- <div>
+        <div *ngFor="let e of events">{{e}}</div>
+      </div> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  
+
+<div>
+    
+    <div *ngIf= "electronic">
+    <p>Electronics</p>
+    <div *ngFor="let product of electronicList; let i = index">
+      <app-product-item [product]="product" (buyEvent)="addToCart(i, 'electronic')"></app-product-item>
+    </div>
+    </div>
+    
+    <div *ngIf= "jewelery">
+    <p>Jewelery</p>
+    <div *ngFor="let product of jeweleryList; let i = index">
+        <app-product-item [product]="product" (buyEvent)="addToCart(i, 'jewelery')"></app-product-item>
+      </div>
+    </div>
+    
+
+      <div *ngIf= "men">
+      <p>Men's clothing</p>
+      <div *ngFor="let product of menList; let i = index">
+      <app-product-item [product]="product" (buyEvent)="addToCart(i, 'men')"></app-product-item>
+      </div>
+    </div>
+
+      <div *ngIf= "women">
+      <p>Women's clothing</p>
+      <div *ngFor="let product of womenList; let i = index">
+        <app-product-item [product]="product" (buyEvent)="addToCart(i, 'women')"></app-product-item>
+      </div>
+        </div>
+      
+</div>

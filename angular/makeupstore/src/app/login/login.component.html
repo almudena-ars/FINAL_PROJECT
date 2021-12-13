@@ -1,0 +1,23 @@
+<button (click)="loggingIn($event)">Login</button>
+<div class="aligner" *ngIf = checkLogin>
+  <mat-card class="aligner-center-item">
+    <mat-card-title>
+      Login Form
+    </mat-card-title>
+    <mat-card-content>
+      <form id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="submitLogin()" novalidate>
+        <mat-form-field style="width: 100%; margin-bottom: 10px;" [ngClass]="{'mat-input-invalid': submitted }">
+          <input matInput type="text" formControlName="email" placeholder="Email"/>
+          <mat-hint style="color: red;" *ngIf="emailInput.invalid && (emailInput.touched || emailInput.dirty)">Email error .___.</mat-hint>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted }">
+          <input matInput type="password" formControlName="password" placeholder="Password"/>
+          <mat-hint style="color: red;" *ngIf="passwordInput.invalid && (passwordInput.touched || passwordInput.dirty)">Please password length should be at least 8 characters</mat-hint>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions style="text-align: right;">
+      <button mat-raised-button type="submit" form="login-form"> Sign In</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

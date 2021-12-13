@@ -1,0 +1,36 @@
+package com.ironhack.edge.controller.imple;
+
+import com.ironhack.edge.dto.SignInDto;
+import com.ironhack.edge.dto.SignInResponseDto;
+import com.ironhack.edge.dto.SignUpResponseDto;
+import com.ironhack.edge.dto.SignupDto;
+import com.ironhack.edge.exceptions.CustomException;
+import com.ironhack.edge.service.interfaces.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@CrossOrigin(origins = "*")
+public class UserControllerImpl {
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/signin")
+    @ResponseStatus(HttpStatus.OK)
+    public SignInResponseDto signIn(@RequestBody SignInDto signInDto){
+        return userService.signIn(signInDto);
+    }
+
+    @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.OK)
+    public SignUpResponseDto signUp(@RequestBody SignupDto signupDto) throws CustomException {
+        return userService.signUp(signupDto);
+    }
+
+    @PostMapping("/addadmin")
+    @ResponseStatus(HttpStatus.OK)
+    public SignUpResponseDto addAdmin(@RequestBody SignupDto signupDto) throws CustomException {
+        return userService.addAdmin(signupDto);
+    }
+}

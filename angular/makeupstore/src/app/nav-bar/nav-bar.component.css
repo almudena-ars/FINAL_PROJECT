@@ -1,0 +1,24 @@
+ul {
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: #AAA;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  list-style: none;
+}
+
+li{
+  margin: 0 3rem;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.5em;
+  color: firebrick;
+}
+
+.active {
+  background-color: #CCC;
+}
