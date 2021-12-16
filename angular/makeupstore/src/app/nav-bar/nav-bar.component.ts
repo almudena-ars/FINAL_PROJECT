@@ -8,26 +8,17 @@ import { StorageService } from '../core/services/storage.service';
 })
 export class NavBarComponent implements OnInit {
 
-  // admin: boolean;
+ 
 
   constructor(
-    // private storageService: StorageService
     ) { 
-    // this.admin = false;
+    
   }
 
   ngOnInit(): void {
-    // this.checkIfUserIsLogged();
+  
   }
 
-  // checkIfUserIsLogged(){
-
-  //   console.log("check " +  this.admin)
-  //   if(this.storageService.isAuthenticated()){
-  //     this.admin = true;
-  //   }else{
-  //     this.admin = false;
-  //   }
-  // }
+ 
 
 }

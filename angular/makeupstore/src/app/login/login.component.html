@@ -8,7 +8,7 @@
       <form id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="submitLogin()" novalidate>
         <mat-form-field style="width: 100%; margin-bottom: 10px;" [ngClass]="{'mat-input-invalid': submittedLogIn }">
           <input matInput type="text" formControlName="email" placeholder="Email"/>
-          <mat-hint style="color: red;" *ngIf="emailInput.invalid && (emailInput.touched || emailInput.dirty)">Email error .___.</mat-hint>
+          <mat-hint style="color: red;" *ngIf="emailInput.invalid && (emailInput.touched )">Email error</mat-hint>
         </mat-form-field>
         <mat-form-field style="width: 100%;" [ngClass]="{'mat-input-invalid': submittedLogIn }">
           <input matInput type="password" formControlName="password" placeholder="Password"/>

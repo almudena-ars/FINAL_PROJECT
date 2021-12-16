@@ -1,0 +1,10 @@
+.container {
+    width: 250px;
+    height: 150px;
+    margin: 10px;
+    border: 1px solid #555;
+  }
+
+  .fondo{
+      background-color: lightgrey;
+  }

@@ -10,8 +10,7 @@ import { Quantity } from '../model/quantity.model';
 })
 export class CartItemComponent implements OnInit {
 
-  // @Input('cart')
-  // cart!: Cart;
+ 
 
   @Input('item')
   item!: Quantity;

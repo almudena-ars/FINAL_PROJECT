@@ -2,7 +2,7 @@ ul {
   margin: 0;
   padding: 1rem;
   box-sizing: border-box;
-  background-color: #AAA;
+  background-color: blue;
   display: flex;
   /* justify-content: center;
   align-items: center; */
@@ -16,7 +16,7 @@ li{
 a {
   text-decoration: none;
   font-size: 1.5em;
-  color: firebrick;
+  color: white;
 }
 
 .active {

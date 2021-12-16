@@ -1,14 +1,13 @@
 
-<mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" >
+<mat-sidenav-container class="container">
+    <mat-sidenav #sidenav mode="side" class="fondo">
       <p><button (click)= "chooseCategory('electronics')">Electronics</button></p>
-      <br>
+     
       <p><button (click)= "chooseCategory('jewelery')">Jewelery</button></p>
       <p><button (click)= "chooseCategory('men')">Men's clothing</button></p>
       <p><button (click)= "chooseCategory('women')">Women's clothing</button></p>
 
     </mat-sidenav>
-  
     <mat-sidenav-content>
       
       <p><button mat-button (click)="sidenav.toggle()">Categories</button></p>

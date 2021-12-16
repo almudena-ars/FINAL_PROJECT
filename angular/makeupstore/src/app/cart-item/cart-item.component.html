@@ -1,15 +1,14 @@
 
-<!-- *ngIf="cart.product.id !== 0" -->
 <div>
-    <!-- <img  [src]="product.image" width="160px" height="210px"> -->
+    <img  [src]="item.product.image" width="160px" height="210px">
     <div>
-    <p> Producto {{ item.product.id }} </p>
-    <p> {{ item.product.title }} </p>
-    <p> {{ item.product.price }} </p>
-    <p> {{ item.product.category }} </p>
-    <p> {{ item.product.description }} </p>
-    <p> {{ item.product.rating }} </p>
-    <p> {{ item.quantity }} </p>
+    <p> Producto: {{ item.product.id }} </p>
+    <p> Title: {{ item.product.title }} </p>
+    <p> Price: {{ item.product.price }} </p>
+    <p> Category: {{ item.product.category }} </p>
+    <p> Description: {{ item.product.description }} </p>
+    <p> Rating: {{ item.product.rating }} </p>
+    <p> Quantity: {{ item.quantity }} </p>
 
 <button (click)="deleteProduct()">Delete Product</button>
 

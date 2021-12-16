@@ -16,13 +16,10 @@ export class CartServiceService {
 
 
 
-  // private dataSource = new BehaviorSubject<Product>(new Product(0,",",0,",",",","",0));
-  // current = this.dataSource.asObservable();
+ 
 
 
   addToCart(product: Product) {
-
-   // this.dataSource.next(product);
 
   }
 
@@ -36,15 +33,10 @@ export class CartServiceService {
   }
 
   private localStorageService;
-  // private currentCart : Product;
   private itemList: Array<Product>
   private currentList: Array<Product>;
-  // private emptyUser : User; 
-  // private emptySession : Logged;
-  // private user : User;
    private _lista = new BehaviorSubject<Product[]>([]);
    sessionStatus = this._lista.asObservable();
-  // check: boolean;
 
   
 
@@ -53,11 +45,6 @@ export class CartServiceService {
     this.localStorageService = localStorage;
     this.itemList = [];
     this.currentList = this.loadSessionData();
-    // this.emptyUser = new User(0, "", "", "", "", "");
-    // this.user = new User(0, "", "", "", "", "");
-    // this.emptySession = new Logged("", this.emptyUser);
-    // console.log("estoy en storage1");
-    // this.check = false;
   }
   ngOnInit(): void {
   }

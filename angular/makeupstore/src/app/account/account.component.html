@@ -1,5 +1,5 @@
 <button (click)="goToLogin()" *ngIf="!userIsLogged">Login</button>
-<div *ngIf="userIsLogged">
+<div *ngIf="userIsLogged" class="container">
 <p>Name:</p>
 <p>{{user.firstName}}</p>
 <p>Surname:</p>

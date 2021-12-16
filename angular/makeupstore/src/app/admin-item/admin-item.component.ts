@@ -15,8 +15,7 @@ export class AdminItemComponent implements OnInit {
   @Input('index')
   index!: number;
 
-  // @Input('ind')
-  // ind!: number;
+
 
   constructor() { }
 
