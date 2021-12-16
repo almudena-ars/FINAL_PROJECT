@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { LoginObject } from '../login/shared/login-object.model';
 import { Logged } from '../core/models/logged.model';
+import { SignUpObject } from '../login/shared/signup-object.model';
 
 
 @Injectable({
@@ -43,6 +44,9 @@ export class MioService {
     return this.http.post<any>(this.dbUrl + `addproduct`, newDto);
   } 
   
+  signUp(signUpObj: SignUpObject): Observable<any>{
+    return this.http.post<any>(this.dbUrl + `signup`, signUpObj);
+  }
 
   logout(): Observable<Boolean> {
     console.log("estoy en mio2");
@@ -53,6 +57,19 @@ export class MioService {
     let requestUrl = this.dbUrl + 'all'; 
     return this.http.get<any>(requestUrl);
   }
+
+  purchase(userId: number, productId: number): Observable<any>{
+    const TransactionDTO = {
+      userId: userId,
+      productId: productId
+    }
+    return this.http.post<any>(this.dbUrl + `save`, TransactionDTO);
+  }
+
+  getTransactionByUser(userId: number): Observable<any>{
+    return this.http.get<any>(this.dbUrl + `allbyuser?userId=${userId}`);
+  }
+    // `/adopt?name=${name}&pet=${index}`  
   // intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   //   // array in local storage for registered users
   //   let users: any[] = JSON.parse(localStorage.getItem('users')) || [];

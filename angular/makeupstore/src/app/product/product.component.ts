@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartServiceService } from '../cart-service.service';
+import { CartServiceService } from '../service/cart-service.service';
 import { User } from '../core/models/user.model';
 import { StorageService } from '../core/services/storage.service';
 import { Cart } from '../model/cart.model';
@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
   events: string[];
   opened: boolean;
 
-  electronic: boolean;
+  electronics: boolean;
   jewelery: boolean;
   men: boolean;
   women: boolean;
@@ -55,7 +55,7 @@ export class ProductComponent implements OnInit {
     this.events = [];
     this.opened = false;
 
-    this.electronic = false;
+    this.electronics = false;
     this.jewelery = false;
     this.men = false;
     this.women = false;
@@ -92,9 +92,8 @@ export class ProductComponent implements OnInit {
                 productDataResult.rating[0]       
                 ); 
               switch(product.category){
-                case "electronic":
+                case "electronics":
                     this.electronicList.push(product);
-                    console.log("almudena")
 
                     break;
                 case "jewelery":
@@ -116,9 +115,13 @@ export class ProductComponent implements OnInit {
     })
   }
 
+  printList(){
+    console.log(this.womenList)
+  }
+
   addToCart(i: number, category:string):void{
     switch(category){
-      case "electronic":
+      case "electronics":
         this.product = this.electronicList[i];
 
           console.log("almudena")
@@ -141,33 +144,34 @@ export class ProductComponent implements OnInit {
       alert("Please login to add to the cart");
     }else{
       console.log("y aki")
-      
-      this.cartService.addToCart(this.product);
+      console.log(this.product)
+      this.cartService.setCurrentCart(this.product);
+      //this.cartService.addToCart(this.product);
     }
   }
 
   chooseCategory(category: string): void{
     switch(category){
-      case "electronic":
-        this.electronic = true;
+      case "electronics":
+        this.electronics = true;
         this.jewelery = false;
         this.men = false;
         this.women = false;
           break;
       case "jewelery":
-        this.electronic = false;
+        this.electronics = false;
         this.jewelery = true;
         this.men = false;
         this.women = false;
         break;
       case "men":
-        this.electronic = false;
+        this.electronics = false;
         this.jewelery = false;
         this.men = true;
         this.women = false;
         break;
       case "women":
-        this.electronic = false;
+        this.electronics = false;
         this.jewelery = false;
         this.men = false;
         this.women = true;

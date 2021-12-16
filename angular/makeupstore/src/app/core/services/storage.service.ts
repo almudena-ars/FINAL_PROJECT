@@ -92,6 +92,8 @@ export class StorageService {
 
   cleanCart(check: boolean){
     this.sessionDisable.next(check);  
+    this.check=false;
+    console.log("LOG OUT")
   }
 
   

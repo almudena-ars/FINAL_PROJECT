@@ -6,11 +6,11 @@
     </mat-card-title>
     <mat-card-content>
       <form id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="submitLogin()" novalidate>
-        <mat-form-field style="width: 100%; margin-bottom: 10px;" [ngClass]="{'mat-input-invalid': submitted }">
+        <mat-form-field style="width: 100%; margin-bottom: 10px;" [ngClass]="{'mat-input-invalid': submittedLogIn }">
           <input matInput type="text" formControlName="email" placeholder="Email"/>
           <mat-hint style="color: red;" *ngIf="emailInput.invalid && (emailInput.touched || emailInput.dirty)">Email error .___.</mat-hint>
         </mat-form-field>
-        <mat-form-field style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted }">
+        <mat-form-field style="width: 100%;" [ngClass]="{'mat-input-invalid': submittedLogIn }">
           <input matInput type="password" formControlName="password" placeholder="Password"/>
           <mat-hint style="color: red;" *ngIf="passwordInput.invalid && (passwordInput.touched || passwordInput.dirty)">Please password length should be at least 8 characters</mat-hint>
         </mat-form-field>
@@ -21,3 +21,34 @@
     </mat-card-actions>
   </mat-card>
 </div>
+<button (click)="signingIn($event)">Sign up</button>
+  <div class="aligner" *ngIf = checkSignUp>
+    <mat-card class="aligner-center-item">
+      <mat-card-title>
+        SignUp Form
+      </mat-card-title>
+      <mat-card-content>
+        <form id="signup-form" #lForm="ngForm" [formGroup]="signupForm" (ngSubmit)="submitSignUp()" novalidate>
+          <mat-form-field style="width: 100%; margin-bottom: 10px;" [ngClass]="{'mat-input-invalid': submitted }">
+            <input matInput type="text" formControlName="firstName" placeholder="First Name"/>
+            <mat-hint style="color: red;" *ngIf="firstNameInput.invalid && (firstNameInput.touched || firstNameInput.dirty)">Insert a first name</mat-hint>
+          </mat-form-field>
+          <mat-form-field style="width: 100%; margin-bottom: 10px;" [ngClass]="{'mat-input-invalid': submitted }">
+            <input matInput type="text" formControlName="lastName" placeholder="Last Name"/>
+            <mat-hint style="color: red;" *ngIf="lastNameInput.invalid && (lastNameInput.touched || lastNameInput.dirty)">Insert a last name</mat-hint>
+          </mat-form-field>
+          <mat-form-field style="width: 100%; margin-bottom: 10px;" [ngClass]="{'mat-input-invalid': submitted }">
+            <input matInput type="text" formControlName="email" placeholder="Email"/>
+            <mat-hint style="color: red;" *ngIf="emailInputSignUp.invalid && (emailInputSignUp.touched || emailInputSignUp.dirty)">Email error .___.</mat-hint>
+          </mat-form-field>
+          <mat-form-field style="width: 100%;" [ngClass]="{'mat-input-invalid': submitted }">
+            <input matInput type="password" formControlName="password" placeholder="Password"/>
+            <mat-hint style="color: red;" *ngIf="passwordInput.invalid && (passwordInput.touched || passwordInput.dirty)">Please password length should be at least 8 characters</mat-hint>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions style="text-align: right;">
+        <button mat-raised-button type="submit" form="signup-form"> Sign Up</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

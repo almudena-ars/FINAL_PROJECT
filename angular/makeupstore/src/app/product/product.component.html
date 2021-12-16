@@ -1,7 +1,7 @@
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" >
-      <p><button (click)= "chooseCategory('electronic')">Electronics</button></p>
+      <p><button (click)= "chooseCategory('electronics')">Electronics</button></p>
       <br>
       <p><button (click)= "chooseCategory('jewelery')">Jewelery</button></p>
       <p><button (click)= "chooseCategory('men')">Men's clothing</button></p>
@@ -19,11 +19,11 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
   
-  
+  <button (click)="printList()">print</button>
 
 <div>
     
-    <div *ngIf= "electronic">
+    <div *ngIf= "electronics">
     <p>Electronics</p>
     <div *ngFor="let product of electronicList; let i = index">
       <app-product-item [product]="product" (buyEvent)="addToCart(i, 'electronic')"></app-product-item>

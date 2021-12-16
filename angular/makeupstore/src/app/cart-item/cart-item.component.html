@@ -1,17 +1,17 @@
 <p>holi</p>
-
-<div *ngIf="cart.product.id !== 0">
-    <img  [src]="cart.product.image" width="160px" height="210px">
+<!-- *ngIf="cart.product.id !== 0" -->
+<div>
+    <!-- <img  [src]="product.image" width="160px" height="210px"> -->
     <div>
-    <p> {{ cart.product.id }} </p>
-    <p> {{ cart.product.title }} </p>
-    <p> {{ cart.product.price }} </p>
-    <p> {{ cart.product.category }} </p>
-    <p> {{ cart.product.description }} </p>
-    <p> {{ cart.product.rating }} </p>
-    <p> {{ cart.quantity }} </p>
+    <p> Producto {{ product.id }} </p>
+    <p> {{ product.title }} </p>
+    <p> {{ product.price }} </p>
+    <p> {{ product.category }} </p>
+    <p> {{ product.description }} </p>
+    <p> {{ product.rating }} </p>
+    <!-- <p> {{ cart.quantity }} </p> -->
 
-    
+<button (click)="deleteProduct()">Delete Product</button>
 
 
     

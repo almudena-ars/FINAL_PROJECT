@@ -1,13 +1,15 @@
-<div *ngFor="let cart of cartList; let i = index">
-    <app-cart-item [cart]="cart"></app-cart-item>
+<p *ngIf="!full">Cart is empty!</p>
+<div *ngFor="let product of imprimir; let i = index">
+    <app-cart-item [product]="product" (deleteProductEvent)="deleteProduct(i)"></app-cart-item>
   </div>
-
+<p *ngIf="full">Total price: {{totalPrice}} </p>
+<button (click)="purchase()" *ngIf="full">Purchase</button>
   <!-- <ul>
     <li *ngFor="let item of cartSet">
      {{item.product.category}}
     </li>
    </ul> -->
-<div *ngIf= "cart.product.id !== 0">
+<!-- <div>
    <p>
     Quantity {{cart.quantity}}
    </p>
@@ -20,7 +22,6 @@
   <p>
     {{cart.product.price}}
   </p>
-</div>
+</div> -->
 
-<button (click)="purchaseProduct()">Purchase</button>
-<button (click)="deleteProduct()">Delete</button>
+

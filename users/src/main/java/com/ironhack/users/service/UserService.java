@@ -56,11 +56,14 @@ public class UserService {
             final AuthenticationToken authenticationToken = new AuthenticationToken(user);
             // save token in database
             authenticationService.saveConfirmationToken(authenticationToken);
+            EmailService emailService = new EmailService();
+            emailService.sendEmail("almudena.ars@gmail.com", signupDto.getFirstName());
             // success in creating
             return new SignUpResponseDto("success", "user created successfully");
         } catch (Exception e) {
             // handle signup error
             throw new CustomException(e.getMessage());
+
         }
     }
 
@@ -88,6 +91,7 @@ public class UserService {
             // save token in database
             authenticationService.saveConfirmationToken(authenticationToken);
             // success in creating
+
             return new SignUpResponseDto("success", "user created successfully");
         } catch (Exception e) {
             // handle signup error

@@ -15,6 +15,8 @@ export class AdminComponent implements OnInit {
   idList: Array<number>;
   allProductList: Array<Product>;
   id:number;
+  addProd: boolean;
+  viewTrans: boolean;
 
 
   constructor(
@@ -25,11 +27,29 @@ export class AdminComponent implements OnInit {
     this.idList = [];
     this.allProductList = [];
     this.id=0;
+    this.addProd = false;
+    this.viewTrans = false;
   }
 
   ngOnInit(): void {
     this.getAllProductsFromDatabase();
     this.getAllProducts();
+  }
+
+  addProducts(event: Event):void{
+    if(this.addProd === false){
+      this.addProd = true;
+    }else{
+      this.addProd = false;
+    }
+  }
+
+  viewTransactions(event: Event):void{
+    if(this.viewTrans === false){
+      this.viewTrans = true;
+    }else{
+      this.viewTrans = false;
+    }
   }
 
 
@@ -46,6 +66,7 @@ export class AdminComponent implements OnInit {
                 productDataResult.title,
                 productDataResult.price,
                 productDataResult.category,
+                productDataResult.image,
                 dataResult[i].quantity
                 ); 
               
@@ -56,6 +77,7 @@ export class AdminComponent implements OnInit {
   }
 
   addNewProduct(i: number, product: Product):void{
+
 
     this.id = this.allProductList[i].id;
     this.mioService.addNewProduct(this.id).subscribe();

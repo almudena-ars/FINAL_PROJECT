@@ -1,4 +1,10 @@
 export class ProductAdmin{
+    public get image(): string {
+        return this._image;
+    }
+    public set image(value: string) {
+        this._image = value;
+    }
     public get quantity(): number {
         return this._quantity;
     }
@@ -36,6 +42,7 @@ export class ProductAdmin{
         private _title: string,
         private _price: number,
         private _category: string,
+        private _image: string,
         private _quantity: number
     ){}
 }
