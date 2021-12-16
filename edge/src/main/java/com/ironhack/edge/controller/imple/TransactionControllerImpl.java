@@ -23,7 +23,7 @@ public class TransactionControllerImpl implements TransactionController {
         transactionService.saveTransaction(transactionDTO);
     }
 
-    @GetMapping("/allbyemail")
+    @GetMapping("/allbyuser")
     @ResponseStatus(HttpStatus.OK)
     public List<Transaction> getAllByUser(@RequestParam Long userId){
         return transactionService.getByUser(userId);

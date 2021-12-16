@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Cart } from '../model/cart.model';
 import { Product } from '../model/product';
+import { Quantity } from '../model/quantity.model';
 
 @Component({
   selector: 'app-cart-item',
@@ -12,8 +13,8 @@ export class CartItemComponent implements OnInit {
   // @Input('cart')
   // cart!: Cart;
 
-  @Input('product')
-  product!: Product;
+  @Input('item')
+  item!: Quantity;
 
   @Input('index')
   index!: number;

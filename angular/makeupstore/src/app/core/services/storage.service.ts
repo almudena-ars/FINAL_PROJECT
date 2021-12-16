@@ -2,6 +2,7 @@
 import {Injectable} from "@angular/core";
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from "rxjs";
+import { CartServiceService } from "src/app/service/cart-service.service";
 import { Logged } from "../models/logged.model";
 import {User} from "../models/user.model";
 
@@ -19,7 +20,8 @@ export class StorageService {
 
   
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private cartService: CartServiceService) {
     this.localStorageService = localStorage;
     this.currentSession = this.loadSessionData();
     this.emptyUser = new User(0, "", "", "", "", "");
@@ -94,6 +96,7 @@ export class StorageService {
     this.sessionDisable.next(check);  
     this.check=false;
     console.log("LOG OUT")
+    this.cartService.dropCart();
   }
 
   

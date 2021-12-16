@@ -9,7 +9,12 @@
     <app-admin-item-two [product]="product" (addProductEvent)="addNewProduct(i, product)"></app-admin-item-two>
   </div>
 </div>
-  <button (click)="viewTransactions($event)" >Add products</button>
+  <button (click)="viewTransactions($event)" >View Transactions</button>
   <div *ngIf="viewTrans">
-<input>
-  </div>
+    <section (keyup.enter)="getTransactionsByUser(userId)">
+    <input type="text" placeholder="User ID" [(ngModel)]="userId" #userInput="ngModel">
+  </section>
+    <div *ngFor="let transaction of transactionList; let i = index">
+      <app-admin-transactions [transaction]="transaction" ></app-admin-transactions>
+    </div>
+    </div>

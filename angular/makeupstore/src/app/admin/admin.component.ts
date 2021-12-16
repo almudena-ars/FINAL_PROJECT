@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../model/product';
 import { ProductAdmin } from '../model/product-admin';
+import { Transaction } from '../model/transaction.model';
 import { ProductsService } from '../service/products.service';
 import { MioService } from '../services/mio.service';
 
@@ -17,6 +18,8 @@ export class AdminComponent implements OnInit {
   id:number;
   addProd: boolean;
   viewTrans: boolean;
+  userId: number;
+  transactionList: Transaction[];
 
 
   constructor(
@@ -29,6 +32,8 @@ export class AdminComponent implements OnInit {
     this.id=0;
     this.addProd = false;
     this.viewTrans = false;
+    this.userId = 0;
+    this.transactionList = [];
   }
 
   ngOnInit(): void {
@@ -52,11 +57,37 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  
+
+  getTransactionsByUser(userId: number){
+    this.mioService.getTransactionByUser(this.userId).subscribe(data=>{
+      for(let i=0; i<data.length; i++){
+        const transaction: Transaction = new Transaction(
+          data[i].id,
+          data[i].purchaseDate,
+          data[i].userId,
+          data[i].productId
+          
+        )
+
+        console.log("trans")
+        console.log(transaction.transactionId)
+        
+        this.transactionList.push(transaction);
+      }
+      
+    }
+    )
+
+   
+      
+  }
+
 
   getAllProductsFromDatabase(){
     this.productsService.getAllProductsFromDatabase().subscribe(dataResult =>{
       this.idList = [];
-      for (let i=1; i<dataResult.length; i++){
+      for (let i=0; i<dataResult.length; i++){
         this.idList.push(dataResult[i].id);
         this.productsService.getProductById(dataResult[i].id).subscribe( 
           productDataResult => {
@@ -89,7 +120,7 @@ export class AdminComponent implements OnInit {
     this.productsService.getAllProducts().subscribe(dataResult => {
       console.log("hola2");
       this.allProductList = [];
-        for (let i=1; i<dataResult.length; i++) { //iteramos el dataresult para traernos cada uno de los pokemon que hay dentro que son 20
+        for (let i=0; i<dataResult.length; i++) { //iteramos el dataresult para traernos cada uno de los pokemon que hay dentro que son 20
           const product: Product = new Product(
             dataResult[i].id,
             dataResult[i].title,

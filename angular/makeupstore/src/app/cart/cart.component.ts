@@ -6,6 +6,9 @@ import { StorageService } from '../core/services/storage.service';
 import { Cart } from '../model/cart.model';
 import { Product } from '../model/product';
 import { MioService } from '../services/mio.service';
+import { Quantity } from '../model/quantity.model';
+import { CartDB } from '../model/cartDB.model';
+import { ProductsService } from '../service/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -25,6 +28,14 @@ user: User
 totalPrice: number;
 full: boolean;
 checkError: boolean;
+quantityList: Quantity[];
+checkLoop: boolean;
+deletedId: number;
+dbCart: CartDB[];
+dbProducts: Product[];
+loadDB: boolean;
+prueba: Product[];
+pruebaDB: CartDB[];
 //aviso!: Subscription;
 
 
@@ -32,7 +43,8 @@ checkError: boolean;
   constructor(
     private cartService: CartServiceService,
     private storageService: StorageService,
-    private mioService: MioService
+    private mioService: MioService,
+    private productsService: ProductsService
   ) { 
     this.product = new Product(0,"",0,"","","",0);
     this.cartList = new Array();
@@ -44,6 +56,14 @@ checkError: boolean;
     this.totalPrice = 0;
     this.full = false;
     this.checkError = false;
+    this.quantityList = [];
+    this.checkLoop = false;
+    this.deletedId = 0;
+    this.dbCart = [];
+    this.dbProducts = [];
+    this.loadDB =  false;
+    this.prueba = [];
+    this.pruebaDB = [];
     
   }
 
@@ -67,7 +87,8 @@ checkError: boolean;
     this.storageService.sessionStatus.subscribe(vale => 
         
         this.saveCart(vale));
-     this.displayCart(this.productList);
+
+     this.displayCart();
 
     // if(this.checkSession === false){
     //   this.saveCart();
@@ -81,16 +102,121 @@ checkError: boolean;
     // this.addProduct(this.product);
   }
 
-  displayCart(lista : Product[]){
+  getCartByUser(userId:number): CartDB[] {
+    this.dbCart = [];
+
+    this.mioService.getCartByUser(userId).subscribe(data=>{
+      
+      console.log(data[1])
+      for(let i=0; i<data.length; i++){
+        const cartDb: CartDB = new CartDB(
+          data[i].id,
+          data[i].userId,
+          data[i].productId
+        )
+        this.dbCart.push(cartDb);
+        
+        console.log("DATAAAAA")
+        console.log(data[i])
+        
+      }
+  }
+    )
+    return this.dbCart;
+    console.log("dbCart")
+    console.log(this.dbCart)
+}
+
+
+  getProductById(carrito: CartDB[]): Product[]{
+    console.log("aqui")
+    console.log(carrito)
+    console.log(carrito.length)
+    
+    for(let i=0; i < carrito.length; i++){
+      console.log("carrito")
+      console.log(carrito[i].productId)
+      this.productsService.getProductById(carrito[i].productId).subscribe( 
+        productDataResult => {
+          console.log(productDataResult[i])
+  
+        const product: Product = new Product(
+              productDataResult.id,
+              productDataResult.title,
+              productDataResult.price,
+              productDataResult.category,
+              productDataResult.description,
+              productDataResult.image,
+              productDataResult.rating[0]       
+              ); 
+              this.productList.push(product)
+      
+    }
+      )
+  } 
+  console.log(this.productList)
+  return this.productList;
+
+    }
+   
+  
+
+
+  deleteCartByUser(userId: number): void{
+    this.mioService.deleteCartByUser(userId).subscribe();
+  }
+
+  displayCart(){
     console.log("estoy en display")
     console.log(this.imprimir)
 
+    console.log(this.loadDB)
+
+    if(this.loadDB === false){
+      console.log("chichi")
+    this.pruebaDB = this.getCartByUser(this.user.id);
+    console.log(this.pruebaDB.length)
+
+    this.prueba = this.getProductById(this.pruebaDB);
+    //this.deleteCartByUser(this.user.id);
+    console.log(this.prueba)
+    this.loadDB = true;
+    
+      // this.dbProducts = this.getCartByUser(this.user.id);
+      // this.deleteCartByUser(this.user.id);
+      
+    }
+
+    
+    
     //let storageProducts: Product[] = JSON.parse(this.imprimir);
     // data: Product[] = JSON(this.imprimir)
+
+
+    for(let i=0; i<this.dbProducts.length; i++){
+      this.imprimir.push(this.dbProducts[i]);
+    }
+
+    this.quantityList = [];
+    this.checkLoop = false;
+
+    for(let i=0; i<this.imprimir.length; i++){
+      const productItem: Product = this.imprimir[i];
+      for(let z=0; z<this.quantityList.length; z++){
+        if(productItem.id === this.quantityList[z].product.id){
+          this.quantityList[z].quantity++;
+          this.checkLoop = true;
+        }
+      }
+      if(this.checkLoop === false){
+        const quantityItem: Quantity = new Quantity(productItem, 1);
+        this.quantityList.push(quantityItem);
+      }
+      this.checkLoop = false;
+      
+    }
     
-    console.log(this.cartService.getCurrentSession());
-    this.productList = this.cartService.getCurrentSession();
-    console.log(this.productList)
+    
     this.totalPrice = 0;
     for(let i=0; i<this.imprimir.length; i++){
       this.totalPrice = this.totalPrice + this.imprimir[i].price;
@@ -110,6 +236,7 @@ checkError: boolean;
 }
   this.imprimir = [];
   this.full = false;
+  this.loadDB = false;
 
 }
     }
@@ -150,10 +277,34 @@ checkError: boolean;
   //   }
 
     deleteProduct(index:number):void{
-      this.totalPrice = this.totalPrice - this.imprimir[index].price;
-      this.imprimir.splice(index, 1);
 
-      this.cartService.deleteItem(this.imprimir);
+      this.deletedId = this.quantityList[index].product.id
+
+      if(this.quantityList[index].quantity > 1){
+        console.log(this.quantityList[index].quantity)
+        
+        this.quantityList[index].quantity = this.quantityList[index].quantity - 1
+        console.log(this.quantityList[index].quantity)
+        
+        
+      }else{
+        console.log(this.quantityList.length)
+        this.quantityList.splice(index,1)
+        console.log(this.quantityList.length)
+
+      }
+
+      
+
+      for(let i=0; i<this.imprimir.length; i++){
+        if(this.deletedId === this.imprimir[i].id){
+          this.totalPrice = this.totalPrice - this.imprimir[i].price;
+          this.imprimir.splice(i, 1);
+          
+        }
+      }
+
+     this.cartService.deleteItem(this.imprimir);
       if(this.imprimir.length === 0){
         this.full = false;
       }

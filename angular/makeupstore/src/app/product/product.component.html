@@ -19,14 +19,13 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
   
-  <button (click)="printList()">print</button>
 
 <div>
     
     <div *ngIf= "electronics">
     <p>Electronics</p>
     <div *ngFor="let product of electronicList; let i = index">
-      <app-product-item [product]="product" (buyEvent)="addToCart(i, 'electronic')"></app-product-item>
+      <app-product-item [product]="product" (buyEvent)="addToCart(i, 'electronics')"></app-product-item>
     </div>
     </div>
     

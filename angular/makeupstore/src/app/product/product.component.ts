@@ -115,16 +115,14 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  printList(){
-    console.log(this.womenList)
-  }
+
 
   addToCart(i: number, category:string):void{
     switch(category){
       case "electronics":
         this.product = this.electronicList[i];
-
-          console.log("almudena")
+          console.log("electronics")
+          console.log(this.product)
 
           break;
       case "jewelery":

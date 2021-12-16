@@ -67,6 +67,10 @@ export class CartServiceService {
     this.itemList = newList;
   }
 
+  dropCart(){
+    this.itemList = [];
+  }
+
   setCurrentCart(cart: Product): void {
     console.log("estoy en el servicio cart")
     console.log(cart);

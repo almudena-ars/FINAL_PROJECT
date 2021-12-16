@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { AdminItemTwoComponent } from './admin-item-two/admin-item-two.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
+import { AdminTransactionsComponent } from './admin-transactions/admin-transactions.component';
 
 
 
@@ -39,7 +40,8 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     AdminItemComponent,
     AdminItemTwoComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    AdminTransactionsComponent
   ],
   imports: [
     BrowserModule,

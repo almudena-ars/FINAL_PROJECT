@@ -69,6 +69,21 @@ export class MioService {
   getTransactionByUser(userId: number): Observable<any>{
     return this.http.get<any>(this.dbUrl + `allbyuser?userId=${userId}`);
   }
+
+  getCartByUser(userId:number):Observable<any>{
+    return this.http.get<any>(this.dbUrl + `cartbyuser?userId=${userId}`);
+  }
+
+  deleteCartByUser(userId: number): Observable<any>{
+    // const body = {
+    //   userId: userId
+    // }
+    return this.http.delete<any>(this.dbUrl + `deletebyuser?userId=${userId}`);
+  }
+
+  // return this.http.delete<any>(this.dbUrl + `deletebyuser?userId=${userId}`);
+
+
     // `/adopt?name=${name}&pet=${index}`  
   // intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   //   // array in local storage for registered users

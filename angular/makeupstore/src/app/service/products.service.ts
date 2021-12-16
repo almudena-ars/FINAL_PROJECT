@@ -55,7 +55,7 @@ export class ProductsService {
   }
 
   getProductById(productId: number): Observable<any>{
-    console.log("hola3");
+    console.log("getProductById");
     let requestUrl = this.apiUrl + 'products/' + productId; 
     return this.http.get<any>(requestUrl);
     
