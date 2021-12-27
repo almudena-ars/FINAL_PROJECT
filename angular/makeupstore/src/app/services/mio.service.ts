@@ -78,6 +78,19 @@ export class MioService {
     return this.http.delete<any>(this.dbUrl + `deletebyuser?userId=${userId}`);
   }
 
+  deleteUser(id: number):  Observable<any>{
+    return this.http.delete<any>(this.dbUrl + `deleteuser?id=${id}`);
+  }
+
+  updateUser(id: number, firstName: string, lastName: string): Observable<any>{
+    const UpdateUserDto = {
+      id: id, 
+      firstName: firstName,
+      lastName: lastName
+    }
+    return this.http.patch<any>(this.dbUrl + 'updateuser', UpdateUserDto);
+  }
+
 
 }
 

@@ -9,6 +9,7 @@
     <app-admin-item-two [product]="product" (addProductEvent)="addNewProduct(i, product)"></app-admin-item-two>
   </div>
 </div>
+
   <button (click)="viewTransactions($event)" >View Transactions</button>
   <div *ngIf="viewTrans">
     <section (keyup.enter)="getTransactionsByUser(userId)">
@@ -18,3 +19,30 @@
       <app-admin-transactions [transaction]="transaction" ></app-admin-transactions>
     </div>
     </div>
+
+    <button (click)="changeUsers($event)" >Users</button>
+    <div *ngIf="userBool">
+    <form (ngSubmit)="updateUser()" #form="ngForm">
+      <div>
+        <input type="number" placeholder="User ID" [(ngModel)]="user.id" required id name="id" #idInput="ngModel">
+        <p class="error-msg" *ngIf="idInput.invalid && idInput.touched">Please enter a valid id</p>
+      </div>
+      <div>
+        <input type="text" placeholder="First Name" [(ngModel)]="user.firstName" required firstName name="firstName" #firstNameInput="ngModel">
+        <p class="error-msg" *ngIf="firstNameInput.invalid && (firstNameInput.touched || firstNameInput.dirty)">Invalid First Name</p>
+      </div>
+      <div>
+        <input type="text" placeholder="Last Name" [(ngModel)]="user.lastName" required lastName name="lastName" #lastNameInput="ngModel">
+        <p class="error-msg" *ngIf="lastNameInput.invalid && (lastNameInput.touched || lastNameInput.dirty)">Invalid Last Name</p>
+      </div>
+    
+      
+      <button type="button" (click)="deleteUser(user.id)">Delete User</button>
+      <button type="submit" [disabled]="form.invalid">Modify User</button>
+      
+      
+    
+    </form>
+  </div>
+   
+      

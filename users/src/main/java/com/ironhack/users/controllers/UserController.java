@@ -1,9 +1,6 @@
 package com.ironhack.users.controllers;
 
-import com.ironhack.users.dto.SignInDto;
-import com.ironhack.users.dto.SignInResponseDto;
-import com.ironhack.users.dto.SignUpResponseDto;
-import com.ironhack.users.dto.SignupDto;
+import com.ironhack.users.dto.*;
 import com.ironhack.users.exceptions.AuthenticationFailException;
 import com.ironhack.users.exceptions.CustomException;
 import com.ironhack.users.service.UserService;
@@ -35,5 +32,17 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public SignUpResponseDto addAdmin(@RequestBody SignupDto signupDto) throws CustomException {
         return userService.addAdmin(signupDto);
+    }
+
+    @DeleteMapping("/deleteuser")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@RequestParam int id){
+        userService.deleteUser(id);
+    }
+
+    @PatchMapping("/updateuser")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser(@RequestBody UpdateUserDto updateUserDto){
+        userService.updateUser(updateUserDto);
     }
 }

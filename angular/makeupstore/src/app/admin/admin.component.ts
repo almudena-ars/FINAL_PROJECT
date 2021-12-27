@@ -20,6 +20,17 @@ export class AdminComponent implements OnInit {
   viewTrans: boolean;
   userId: number;
   transactionList: Transaction[];
+  dUser: number;
+  userBool: boolean;
+  updateId: number;
+  updateFirst: string;
+  updateLast: string;
+
+  user: {
+    id: number,
+    firstName: string,
+    lastName: string
+  }
 
 
   constructor(
@@ -34,11 +45,23 @@ export class AdminComponent implements OnInit {
     this.viewTrans = false;
     this.userId = 0;
     this.transactionList = [];
+    this.dUser = 0;
+    this.userBool = false;
+    this.updateId = 0;
+    this.updateFirst = '';
+    this.updateLast = '';
+
+    this.user = {
+      id: 0,
+      firstName: '',
+      lastName: ''
+    }
   }
 
   ngOnInit(): void {
     this.getAllProductsFromDatabase();
     this.getAllProducts();
+    // console.log(this.form.value);
   }
 
   addProducts(event: Event):void{
@@ -57,6 +80,17 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  deleteUser(id: number): void{
+    this.mioService.deleteUser(id).subscribe();
+  }
+
+  changeUsers(event: Event): void{
+    if(this.userBool === false){
+      this.userBool = true;
+    }else{
+      this.userBool = false;
+    }
+  }
   
 
   getTransactionsByUser(userId: number){
@@ -137,6 +171,10 @@ export class AdminComponent implements OnInit {
       
         
     });
+  }
+
+  updateUser(): void{
+   this.mioService.updateUser(this.user.id, this.user.firstName, this.user.lastName).subscribe();
   }
 
 

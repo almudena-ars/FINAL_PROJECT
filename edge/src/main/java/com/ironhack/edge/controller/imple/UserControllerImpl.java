@@ -1,9 +1,6 @@
 package com.ironhack.edge.controller.imple;
 
-import com.ironhack.edge.dto.SignInDto;
-import com.ironhack.edge.dto.SignInResponseDto;
-import com.ironhack.edge.dto.SignUpResponseDto;
-import com.ironhack.edge.dto.SignupDto;
+import com.ironhack.edge.dto.*;
 import com.ironhack.edge.exceptions.CustomException;
 import com.ironhack.edge.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +29,17 @@ public class UserControllerImpl {
     @ResponseStatus(HttpStatus.OK)
     public SignUpResponseDto addAdmin(@RequestBody SignupDto signupDto) throws CustomException {
         return userService.addAdmin(signupDto);
+    }
+
+    @DeleteMapping("/deleteuser")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@RequestParam int id){
+        userService.deleteUser(id);
+    }
+
+    @PatchMapping("/updateuser")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser(@RequestBody UpdateUserDto updateUserDto){
+        userService.updateUser(updateUserDto);
     }
 }
